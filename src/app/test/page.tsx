@@ -5,16 +5,18 @@ export async function GET() {
   const connection = await mysql.createConnection({
     host: '192.168.16.101',
     port: 3306,
-    database: 'test',
+    database: 'mysql',
     user: 'AMS',
     password: '2023r05T%'
   });
 
-  const sql = 'SELECT * FROM m_employee';
+  const sql = 'show tables;';
   const result = await connection.query(sql);
   connection.end();
 
-  return NextResponse.json(result);
+  return JSON.stringify(result);
 }
 
-export default GET;
+export default function Page({ users }) {
+  return GET();
+}
