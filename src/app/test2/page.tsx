@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './Home.module.css';
 import SampleDataInput from './sampleDatePicker'
+import Camera from '../../components/cameraSample'
 
 export default function Home() {
 	return (
@@ -23,6 +24,8 @@ export default function Home() {
 				<br></br>
 				<SampleDataInput />
 			</div>
+
+			<Camera />
 		</div>
 	);
 }
