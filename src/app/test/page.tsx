@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 import * as mysql from 'promise-mysql';
 
