@@ -1,28 +1,38 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import Webcam from "react-webcam";
+import React, { useEffect, useState } from 'react';
 
-const CameraComponent = () => {
-    const videoRef = useRef(null);
+
+function App() {
+
+    const [cameras, setCameras] = useState([]);
+    const [camera, setCamera] = useState(null);
 
     useEffect(() => {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then((stream) => {
-                    if (videoRef.current) {
-                        videoRef.current.srcObject = stream;
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error accessing the camera: ", error);
-                });
-        }
-    }, []);
+        navigator.mediaDevices.enumerateDevices().then(mediaDevices => {
+            const devices = mediaDevices.filter(({ kind }) => kind === "videoinput");
+            setCameras(devices);
+            if (devices.length) {
+                setCamera(devices[0]);
+            }
+        })
+    }, [])
 
     return (
-        <div>
-            <video ref={videoRef} autoPlay={true} />
-        </div>
+        <>
+            <div className="bg-dark" style={{ minHeight: '100vh' }}>
+                <div className="p-5">
+                    ght:           <Webcam
+                        videoConstraints={{
+                            width: 640,
+                            height: 480,
+                            deviceId: camera?.deviceId,
+                        }}
+                    />
+                </div>
+            </div>
+        </>
     );
-};
+}
 
-export default CameraComponent;
+export default App;
