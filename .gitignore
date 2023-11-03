@@ -131,3 +131,7 @@ dist
 graphql_schema.json
 .graphql_cache
 .graphql_ppx_cache
+
+
+#ユーザ指定
+private/

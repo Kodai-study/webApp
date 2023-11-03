@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "http-proxy": "^1.18.1",
     "next": "13.5.4",
     "promise-mysql": "^5.2.0",
     "react": "^18",
     "react-datepicker": "^4.21.0",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-webcam": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",
