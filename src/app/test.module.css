@@ -1,21 +1,21 @@
-.container{
-    padding: 0 2rem;
-  }
-
-.h1{
-  text-size-adjust: 50px;
+.container {
+  padding: 0 2rem;
 }
-  
-  .mian{
-    min-height: 100vh;
-    padding: 4rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .text{
-    outline: auto;
-  }
+
+.h1 {
+  text-size-adjust: 150px;
+}
+
+.mian {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  outline: auto;
+}

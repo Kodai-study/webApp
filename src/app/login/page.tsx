@@ -81,6 +81,7 @@ const Logtextbox = () => {
     <form id ="login2">
       パスワード<input type="text" className={style.text}></input>
     </form>
+    <textbox></textbox>
   </dev>
   );
 }
@@ -106,7 +107,7 @@ export async function GET() {
 export default function Page() {
   return (
     <dev>
-      <GET></GET>
+      <h1>ログイン</h1>
       <Logtextbox></Logtextbox>
     </dev>
   );

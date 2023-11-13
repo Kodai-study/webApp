@@ -7,19 +7,19 @@ export default function home() {
       <div className={style.container}>
         <h1 className={style.h1}>HOME</h1>
         <br></br>
-        <Link href="/tracking">
+        <Link href="/tracker">
             製品追跡
         </Link>
         <br></br>
-        <Link href="/test">
+        <Link href="/statistics">
             統計データ
         </Link>
         <br></br>
-        <Link href="/cam">
+        <Link href="/webcam">
             カメラ
         </Link>
         <br></br>
-        <Link href="/user">
+        <Link href="/users">
             ユーザー管理
         </Link>
       </div>
