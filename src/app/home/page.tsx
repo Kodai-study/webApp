@@ -16,7 +16,7 @@ export default function home() {
         </Link>
         <br></br>
         <Link href="/webcam">
-            カメラ
+            監視カメラ
         </Link>
         <br></br>
         <Link href="/users">

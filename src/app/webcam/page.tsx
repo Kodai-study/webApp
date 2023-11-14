@@ -1,37 +1,25 @@
 'use client'
-import Webcam from "react-webcam";
-import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-function App() {
-
-  const [cameras, setCameras] = useState([]);
-  const [camera, setCamera] = useState(null);
-
-  useEffect(() => {
-    navigator.mediaDevices.enumerateDevices().then(mediaDevices => {
-      const devices = mediaDevices.filter(({ kind }) => kind === "videoinput");
-      setCameras(devices);
-      if (devices.length) {
-        setCamera(devices[0]);
-      }
-    })
-  }, [])
-
-  return (
-    <>
-      <div className="bg-dark" style={{ minHeight: '100vh' }}>
-        <div className="p-5">
-          <Webcam
-            videoConstraints={{
-              width: 640,
-              height: 480,
-              deviceId: camera?.deviceId,
-            }}
-          />
+export const Cam = ({ children, streamNumber }) => {
+    return (
+        <div>
+            {children}
+            <img src={"http://192.168.16.101:8080/?action=stream_" + streamNumber} />
         </div>
-      </div>
-    </>
-  );
+    );
 }
 
-export default App;
+
+export default function home() {
+    const router = useRouter();
+    return (
+        <dev>
+            <Cam streamNumber={0}>監視カメラー</Cam>
+            <Cam streamNumber={1}>監視カメラ2</Cam>
+            <button onClick={() => router.push("/home")}>戻る</button>
+        </dev>
+    );
+
+}
