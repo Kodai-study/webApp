@@ -1,22 +1,20 @@
-import { NextResponse } from 'next/server';
-import * as mysql from 'promise-mysql';
+'use client'
+import Button from 'react-bootstrap/Button';
 
-export async function GET() {
-  const connection = await mysql.createConnection({
-    host: '192.168.16.101',
-    port: 3306,
-    database: 'test',
-    user: 'AMS',
-    password: '2023r05T%'
-  });
-
-  const sql = 'show tables;';
-  const result = await connection.query(sql);
-  connection.end();
-
-  return JSON.stringify(result);
+function TypesExample() {
+  return (
+    <>
+      <Button variant="primary">Primary</Button>{' '}
+      <Button variant="secondary">Secondary</Button>{' '}
+      <Button variant="success">Success</Button>{' '}
+      <Button variant="warning">Warning</Button>{' '}
+      <Button variant="danger">Danger</Button>{' '}
+      <Button variant="info">Info</Button>{' '}
+      <Button variant="light">Light</Button>{' '}
+      <Button variant="dark">Dark</Button>
+      <Button variant="link">Link</Button>
+    </>
+  );
 }
 
-export default function Page({ users }) {
-  return GET();
-}
+export default TypesExample;
