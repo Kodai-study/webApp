@@ -1,20 +1,17 @@
-import { NextResponse } from 'next/server';
 import * as mysql from 'promise-mysql';
 import React from 'react';
-import Link from 'next/link';
 import style from '../test.module.css';
-import {useState}  from 'react'
 
 const Logtextbox = () => {
   return (
-    <dev>
-    <form id ="login">
-      社員番号<input type="text" className={style.text}></input>
-    </form>
-    <form id ="login2">
-      パスワード<input type="text" className={style.text}></input>
-    </form>
-  </dev>
+    <div>
+      <form id="login">
+        社員番号<input type="text" className={style.text}></input>
+      </form>
+      <form id="login2">
+        パスワード<input type="text" className={style.text}></input>
+      </form>
+    </div>
   );
 }
 
@@ -33,14 +30,14 @@ export async function GET() {
   const result2 = await connection.query(sql2);
   connection.end();
 
-  return JSON.stringify(result)+JSON.stringify(result2);
+  return JSON.stringify(result) + JSON.stringify(result2);
 }
 
 export default function Page() {
   return (
-    <dev>
+    <div>
       <GET></GET>
       <Logtextbox></Logtextbox>
-    </dev>
+    </div>
   );
 }
