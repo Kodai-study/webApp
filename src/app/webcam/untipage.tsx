@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
 
-  const [cameras, setCameras] = useState([]);
-  const [camera, setCamera] = useState(null);
+  const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
+  const [camera, setCamera] = useState<MediaDeviceInfo | null>(null);
 
   useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then(mediaDevices => {
