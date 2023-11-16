@@ -27,7 +27,7 @@ const ChangePass: React.FC = () => {
         <input type='password' name='Apassword' placeholder='現在のパスワード' />
         <input type='password' name='Bpassword' placeholder='変更後のパスワード' />
       </form>
-      </Fragment>
+    </Fragment>
   );
 };
 

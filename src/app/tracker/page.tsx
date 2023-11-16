@@ -9,7 +9,7 @@ const videoConstraints = {
   facingMode: "user"
 };
 
-export default function App () {
+export default function App() {
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
   const [url, setUrl] = useState<string | null>(null);
