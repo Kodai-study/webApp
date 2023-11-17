@@ -11,8 +11,8 @@ const ToggleComponent: React.FC = () => {
 
   return (
     <div>
-      <p>aaaa</p>
-      <Button variant="primary" onClick={toggleVisibility}>Toggle Component</Button>{' '}
+      <p>社員番号：</p>
+      <Button variant="primary" onClick={toggleVisibility}>パスワードを変更する</Button>{' '}
       {isVisible && <ChangePass />}
     </div>
   );
@@ -22,7 +22,6 @@ const ToggleComponent: React.FC = () => {
 const ChangePass: React.FC = () => {
   return (
     <Fragment>
-      <p>社員番号：</p>
       <form>
         <input type='password' name='Apassword' placeholder='現在のパスワード' />
         <input type='password' name='Bpassword' placeholder='変更後のパスワード' />

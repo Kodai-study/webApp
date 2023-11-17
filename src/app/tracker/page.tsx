@@ -1,6 +1,7 @@
 'use client'
 import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
+import { useRouter } from 'next/navigation';
 //import "./styles.css";
 
 const videoConstraints = {
@@ -9,7 +10,7 @@ const videoConstraints = {
   facingMode: "user"
 };
 
-export default function App () {
+export function Cam() {
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
   const [url, setUrl] = useState<string | null>(null);
@@ -23,10 +24,10 @@ export default function App () {
   return (
     <>
       <header>
-        <h1>カメラアプリ</h1>
+        <h1>画像検索</h1>
       </header>
       {isCaptureEnable || (
-        <button onClick={() => setCaptureEnable(true)}>開始</button>
+        <button onClick={() => setCaptureEnable(true)}>撮影する</button>
       )}
       {isCaptureEnable && (
         <>
@@ -65,3 +66,41 @@ export default function App () {
     </>
   );
 };
+
+export function Input(camresurlt) {
+  const router = useRouter();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/result?no=${inputValue}`);
+  };
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        シリアルナンバー手動入力：
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">送信</button>
+    </form>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <Cam></Cam>
+      <Input></Input>
+    </div>
+  );
+
+}

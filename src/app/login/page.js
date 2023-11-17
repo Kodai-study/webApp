@@ -1,6 +1,5 @@
 "use client"
 import { useState } from 'react'
-import Link from '../../../node_modules/next/link'
 import { useRouter } from 'next/navigation'
 
 export default function Home() {
@@ -24,25 +23,24 @@ export default function Home() {
     const data = await res.text()
 
     if (data == 1) {
-      setPostedData('OK')
+      //setPostedData('OK')
       router.push("/home")
     }
     else {
-      setPostedData('NG')
+      setPostedData('社員番号またはパスワードが違います。')
     }
     console.log(data)
   }
 
   return (
     <main>
-      <h1>Next JS APIのテスト</h1>
+      <h1>Login</h1>
       <form onSubmit={onSubmitHandler} className='flex flex-col justify-center' action='/api/form' method='POST'>
         <input type='text' name='id' placeholder='userid' />
         <input type='password' name='password' placeholder='password' />
         <button type='submit'>送信</button>
       </form>
-
-      <p>APIから受け取った値{postedData}</p>
+      <p>{postedData}</p>
     </main>
   )
 }
