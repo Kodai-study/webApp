@@ -5,10 +5,10 @@ const httpProxy = require('http-proxy');
 httpProxy.createProxyServer({
     target: {
         host: '0.0.0.0',
-        port: 3000,
+        port: 8080,
     },
     ssl: {
         key: fs.readFileSync('./private/server.key'),
         cert: fs.readFileSync('./private/server.crt')
     }
-}).listen(443);
+}).listen(1919);

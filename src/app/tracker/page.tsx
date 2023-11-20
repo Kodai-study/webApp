@@ -2,7 +2,9 @@
 import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import { useRouter } from 'next/navigation';
-//import "./styles.css";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const videoConstraints = {
   width: 720,
@@ -24,15 +26,15 @@ export function Cam() {
   return (
     <>
       <header>
-        <h1>画像検索</h1>
+        <h1>製品追跡</h1>
       </header>
       {isCaptureEnable || (
-        <button onClick={() => setCaptureEnable(true)}>撮影する</button>
+        <Button variant="primary" onClick={() => setCaptureEnable(true)}>撮影する</Button>
       )}
       {isCaptureEnable && (
         <>
           <div>
-            <button onClick={() => setCaptureEnable(false)}>終了</button>
+            <Button variant="secondary" onClick={() => setCaptureEnable(false)}>終了</Button>
           </div>
           <div>
             <Webcam
@@ -44,7 +46,7 @@ export function Cam() {
               videoConstraints={videoConstraints}
             />
           </div>
-          <button onClick={capture}>キャプチャ</button>
+          <Button variant="secondary" onClick={capture}>キャプチャ</Button>
         </>
       )}
       {url && (
@@ -68,8 +70,14 @@ export function Cam() {
 };
 
 export function Input(camresurlt) {
-  const router = useRouter();
+  const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const router = useRouter();
+
+  //ボタンをクリックした時のstate変数
+  const onClickhandler = () => {
+    setShowInput(!showInput);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,20 +89,27 @@ export function Input(camresurlt) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        シリアルナンバー手動入力：
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit">送信</button>
-    </form>
+    <>
+      <Button variant="primary" onClick={onClickhandler}>手動入力
+        {showInput}
+      </Button>{' '}
+      {showInput &&
+        <form onSubmit={handleSubmit}>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1">シリアルナンバー</InputGroup.Text>
+            <Form.Control
+              placeholder="xxxxxxxx"
+              value={inputValue}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <Button variant="secondary" type="submit">送信</Button>
+        </form>
+      }
+    </>
+
   );
 }
-
 export default function App() {
   return (
     <div>
@@ -102,5 +117,4 @@ export default function App() {
       <Input></Input>
     </div>
   );
-
 }

@@ -8,7 +8,6 @@ const ToggleComponent: React.FC = () => {
   const toggleVisibility = () => {
     setIsVisible(prevState => !prevState);
   };
-
   return (
     <div>
       <p>社員番号：</p>
@@ -26,7 +25,7 @@ const ChangePass: React.FC = () => {
         <input type='password' name='Apassword' placeholder='現在のパスワード' />
         <input type='password' name='Bpassword' placeholder='変更後のパスワード' />
       </form>
-      </Fragment>
+    </Fragment>
   );
 };
 

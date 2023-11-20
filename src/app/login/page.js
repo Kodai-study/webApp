@@ -1,6 +1,12 @@
 "use client"
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function Home() {
   const [postedData, setPostedData] = useState('')
@@ -33,14 +39,28 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1>Login</h1>
-      <form onSubmit={onSubmitHandler} className='flex flex-col justify-center' action='/api/form' method='POST'>
-        <input type='text' name='id' placeholder='userid' />
-        <input type='password' name='password' placeholder='password' />
-        <button type='submit'>送信</button>
-      </form>
-      <p>{postedData}</p>
-    </main>
+    <>
+      <Container>
+        <Row>
+          <Col xs></Col>
+          <Col xs={{ order: 12 }}>
+            <h1>Login</h1>
+            <Form onSubmit={onSubmitHandler} className='flex flex-col justify-center' action='/api/form' method='POST'>
+              <Form.Group className="mb-3" name="id">
+                <Form.Label>社員番号</Form.Label>
+                <Form.Control type="text" placeholder='userID' />
+              </Form.Group>
+              <Form.Group className="mb-3" name="id">
+                <Form.Label>パスワード</Form.Label>
+                <Form.Control type="password" placeholder='password' />
+              </Form.Group>
+              <Button variant="primary" type='submit'>送信</Button>
+            </Form>
+            <p>{postedData}</p>
+          </Col>
+          <Col xs={{ order: 1 }}></Col>
+        </Row>
+      </Container>
+    </>
   )
 }
