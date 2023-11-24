@@ -114,6 +114,7 @@ export default function App() {
   return (
     <div>
       <Cam></Cam>
+      <br></br>
       <Input></Input>
     </div>
   );

@@ -1,16 +1,22 @@
-"use client";
+import DBGet1Colum from "./DB"
+import GetParameter_no from "./GetDatabaseSample"
 
-import { useSearchParams } from "next/navigation";
-
-export default function SampleParamComponent() {
-  const searchParams = useSearchParams();
-  const no = searchParams.get("no");
-  const name = searchParams.get("sample_name");
+const ResultPage = async ({ params, searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  const re = await DBGet1Colum(searchParams.no)
+  const keys = Object.keys(re[0]);
+  const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
 
   return (
     <>
-      <div>シリアルナンバーは{no}</div>
-      <div>{name}</div>
+      {propertiesString}
+      <br></br>
+      <GetParameter_no />
     </>
-  );
+  )
 }
+
+export default ResultPage
