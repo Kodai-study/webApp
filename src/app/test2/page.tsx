@@ -1,34 +1,43 @@
-// 'use client'
-// import { useRouter } from 'next/navigation';
-// import { useState } from 'react';
+import * as mysql from 'promise-mysql';
+import React from 'react';
+import style from '../test.module.css';
 
-// export default function MyForm() {
-//   const router = useRouter();
-//   const [inputValue, setInputValue] = useState('');
+const Logtextbox = () => {
+  return (
+    <div>
+      <form id="login">
+        社員番号<input type="text" className={style.text}></input>
+      </form>
+      <form id="login2">
+        パスワード<input type="text" className={style.text}></input>
+      </form>
+    </div>
+  );
+}
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     router.push(`/result?no=${inputValue}`);
-//   };
+export async function GET() {
+  const connection = await mysql.createConnection({
+    host: '192.168.16.101',
+    port: 3306,
+    database: 'test',
+    user: 'AMS',
+    password: '2023r05T%'
+  });
 
-//   const handleChange = (e) => {
-//     setInputValue(e.target.value);
-//   };
+  const sql = 'select * from m_employee where employee_no = ' + 2 + ';';
+  const sql2 = 'select * from m_employee where employee_no = ' + 1 + ';';
+  const result = await connection.query(sql);
+  const result2 = await connection.query(sql2);
+  connection.end();
 
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         シリアルナンバーを入力してください：
-//         <input
-//           type="text"
-//           value={inputValue}
-//           onChange={handleChange}
-//         />
-//       </label>
-//       <button type="submit">送信</button>
-//     </form>
-//   );
-// }
+  return JSON.stringify(result) + JSON.stringify(result2);
+}
 
-
-
+export default function Page() {
+  return (
+    <div>
+      <GET></GET>
+      <Logtextbox></Logtextbox>
+    </div>
+  );
+}
