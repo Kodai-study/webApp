@@ -20,8 +20,8 @@ export async function GET() {
     host: '192.168.16.101',
     port: 3306,
     database: 'test',
-    user: 'AMS',
-    password: '2023r05T%'
+    user: 'test',
+    password: 'test'
   });
 
   const sql = 'select * from m_employee where employee_no = ' + 2 + ';';
