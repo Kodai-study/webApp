@@ -9,37 +9,40 @@ const videoConstraints = {
   facingMode: "user"
 };
 
+
 const CamCaputureBlock = ({ webcamRef, capture, setCaptureEnable }: {
   webcamRef: React.RefObject<Webcam>; capture: () => void; setCaptureEnable: (enable: boolean) => void;
-}) => (<>
-  <div>
-    <Button variant="secondary" onClick={() => setCaptureEnable(false)}>終了</Button>
-  </div>
-  <div>
-    <Webcam
-      audio={false}
-      width={540}
-      height={360}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      videoConstraints={videoConstraints} />
-  </div>
-  <Button variant="secondary" onClick={capture}>キャプチャ</Button>
-</>);
+}) => (
+  <>
+    <div>
+      <Button variant="secondary" onClick={() => setCaptureEnable(false)}>終了</Button>
+    </div>
+    <div>
+      <Webcam
+        audio={false}
+        width={540}
+        height={360}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        videoConstraints={videoConstraints} />
+    </div>
+    <Button variant="secondary" onClick={capture}>キャプチャ</Button>
+  </>);
 
 
-const CaputureImageBlock = ({ url, setUrl }: { url: string; setUrl: (url: string | null) => void; }) => (<>
-  <div>
-    <Button onClick={() => { setUrl(null); }}>
-      削除
-    </Button>
-  </div>
-  <div>
-    <img src={url} alt="Screenshot" />
-  </div>
-</>);
+const CaputureImageBlock = ({ url, setUrl }: { url: string; setUrl: (url: string | null) => void; }) => (
+  <>
+    <div>
+      <Button onClick={() => { setUrl(null); }}>
+        削除
+      </Button>
+    </div>
+    <div>
+      <img src={url} alt="Screenshot" />
+    </div>
+  </>);
 
-export function Cam() {
+export function QrCaputure() {
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
   const [url, setUrl] = useState<string | null>(null);
