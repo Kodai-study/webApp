@@ -1,7 +1,7 @@
 import * as mysql from 'promise-mysql';
 
 //ログイン用データベース接続API
-export async function LogDB(id, pass) {
+export async function LogDB(id: string, pass: string) {
     const connection = await mysql.createConnection({
         host: '192.168.16.101',
         port: 3306,

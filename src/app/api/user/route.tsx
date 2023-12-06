@@ -1,16 +1,16 @@
-import {DB} from './DB.js'
+import { DB } from './DB.jsx'
 
-export async function GET(request) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   console.log("GET request", searchParams.get("name"))
 
   return new Response(JSON.stringify({ message: "Hello World" }))
 }
 
-// ポストした時の処理
-export async function POST(request) {
+export async function POST(request: Request) {
   const body = await request.json()
+  const dbResult = await DB(body.beforepass, body.afterpass)
   return new Response(
-    await DB(body.beforepass, body.afterpass)
+    dbResult.toString()
   )
 }

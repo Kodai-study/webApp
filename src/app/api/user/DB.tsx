@@ -1,7 +1,7 @@
 import * as mysql from 'promise-mysql';
 
 //ログイン用データベース接続API
-export async function DB( bpass, apass) {
+export async function DB(bpass: string, apass: string) {
     const connection = await mysql.createConnection({
         host: '192.168.16.101',
         port: 3306,
@@ -17,7 +17,7 @@ export async function DB( bpass, apass) {
         return (-1);
     }
     const sql2 = `UPDATE t_login SET password = ? WHERE employee_no = ?`
-    const result2 = await connection.query(sql2, [apass,1]);
+    const result2 = await connection.query(sql2, [apass, 1]);
     connection.end();
     return (0);
 }
