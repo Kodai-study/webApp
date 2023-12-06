@@ -1,13 +1,14 @@
-import { NextResponse } from 'next/server';
-import * as mysql from 'promise-mysql';
+"use client"
 import React from 'react';
 import Link from 'next/link';
-import {useState}  from 'react'
 
 export default function Page() {
     return (
-      <dev>
-        <h1>roottest</h1>
-      </dev>
+      <div>
+        <h1>統計データ</h1>
+        <Link href="/timestatistics">加工時間統計</Link>
+        <br></br>
+        <Link href="/home">加工数統計</Link>
+      </div>
     );
 }

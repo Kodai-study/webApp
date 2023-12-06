@@ -1,5 +1,20 @@
 import DBGet1Colum from "./DB"
-import GetParameter_no from "./GetDatabaseSample"
+import Image from 'next/legacy/image';
+import Link from 'next/link';
+
+const Imgsrc = () => {
+  return (
+    <div>
+      <Image
+        src="/imgs/yasi.jpg"
+        alt="Example Image"
+        layout="responsive"
+        width={1980}
+        height={1150}
+      />
+    </div>
+  );
+};
 
 const ResultPage = async ({ params, searchParams,
 }: {
@@ -14,7 +29,8 @@ const ResultPage = async ({ params, searchParams,
       <>
         {propertiesString}
         <br></br>
-        <GetParameter_no />
+        <Imgsrc/>
+        <Link href="/tracker">戻る</Link>
       </>
     )
   }
@@ -24,7 +40,7 @@ const ResultPage = async ({ params, searchParams,
       <>
         {messege}
         <br></br>
-        <GetParameter_no />
+        <Link href="/tracker">戻る</Link>
       </>
     )
   }
