@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import { useRouter } from 'next/navigation';
 import Button from 'react-bootstrap/Button';
@@ -69,7 +69,7 @@ export function Cam() {
   );
 };
 
-export function Input(camresurlt) {
+export function Input() {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const router = useRouter();
@@ -79,12 +79,12 @@ export function Input(camresurlt) {
     setShowInput(!showInput);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/result?no=${inputValue}`);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -103,7 +103,7 @@ export function Input(camresurlt) {
               onChange={handleChange}
             />
           </InputGroup>
-          <Button variant="secondary" type="submit">送信</Button>
+          <Button variant="secondary" type="submit" >送信</Button>
         </form>
       }
     </>
