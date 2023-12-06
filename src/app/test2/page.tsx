@@ -31,6 +31,3 @@ export const data = {
   ],
 };
 
- export default function App() {
-  return <Pie data={data} />;
-}
