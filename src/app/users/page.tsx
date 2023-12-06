@@ -39,7 +39,7 @@ export default function User() {
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(hoge(e) == false){
+    if (hoge(e) == false) {
       return;
     }
     const formData = new FormData(e.currentTarget);

@@ -10,7 +10,7 @@ async function TrackDB(no) {
         password: 'test'
     });
     const sql = `select * from m_work where serial_number = ${no};`;
-    
+
     const result = await connection.query(sql);
     return result
 }
