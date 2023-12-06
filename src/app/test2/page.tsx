@@ -31,3 +31,16 @@ export const data = {
   ],
 };
 
+// dataのデータを表示させる
+export default function Chart() {
+  return (
+    <div>
+      <Pie data={data}
+        width={400}
+        height={400}
+        options={{ maintainAspectRatio: false }}
+
+      />
+    </div>
+  );
+}
