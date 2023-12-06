@@ -10,12 +10,19 @@ export async function LogDB(id: string, pass: string) {
         password: 'test'
     });
     //社員番号とパスワード入力⇒持ってくるもの：名前　社員番号　パスワード　権限
-    const sql = 'select employee_name, t_login.employee_no, \
-    password, authority from m_employee inner join \
-    t_login on m_employee.employee_no = t_login.employee_no \
-    where m_employee.employee_no = ' + id + ';';
-    //const sql = 'select * from m_employee where employee_no = ' + 2 + ';';
-    const result = await connection.query(sql);
+    const sql = `
+    SELECT employee_name, 
+           t_login.employee_no, 
+           password, 
+           authority 
+    FROM m_employee 
+    INNER JOIN t_login 
+        ON m_employee.employee_no = t_login.employee_no 
+    WHERE m_employee.employee_no = ?;
+    `;
+
+    const result = await connection.query(sql, [id]);
+
     connection.end();
 
     //パスワード比較する
