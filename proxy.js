@@ -12,3 +12,5 @@ httpProxy.createProxyServer({
         cert: fs.readFileSync('./private/server.crt')
     }
 }).listen(443);
+
+console.log("動作中")

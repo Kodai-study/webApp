@@ -1,5 +1,6 @@
+"use client"
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface CamProps {
     streamNumber: number;
@@ -10,7 +11,7 @@ function Cam({ streamNumber, children }: CamProps) {
     return (
         <div>
             {children}
-            <img src={`http://192.168.16.101:8080/?action=stream_${streamNumber}`} />
+            <img src={`https://192.168.16.101:1919/?action=stream_${streamNumber}`} />
         </div>
     );
 }
