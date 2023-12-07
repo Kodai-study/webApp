@@ -14,6 +14,13 @@ const Imgsrc = () => {
                 width={1980}
                 height={1150}
             />
+            <Image
+                src="/imgs/グラフ.PNG"
+                alt="Example Image"
+                layout="responsive"
+                width={1980}
+                height={1150}
+            />
         </div>
     );
 };

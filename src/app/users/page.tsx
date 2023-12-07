@@ -2,7 +2,7 @@
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 
 type userState = { beforepass: string, afterpass: string }
 

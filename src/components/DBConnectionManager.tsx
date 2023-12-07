@@ -1,7 +1,7 @@
 // db.ts with connection pool
 import * as mysql from 'promise-mysql';
 
-const DATABASE_HOST = 'localhost';
+const DATABASE_HOST = '192.168.16.101';
 
 class ConnectionPool {
     private static instance: mysql.Pool;
