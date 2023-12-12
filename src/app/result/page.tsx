@@ -8,14 +8,7 @@ const Imgsrc = () => {
     return (
         <div>
             <Image
-                src="/imgs/yasi.jpg"
-                alt="Example Image"
-                layout="responsive"
-                width={1980}
-                height={1150}
-            />
-            <Image
-                src="/imgs/グラフ.PNG"
+                src="/imgs/test/ana.png"
                 alt="Example Image"
                 layout="responsive"
                 width={1980}
@@ -59,7 +52,7 @@ const ResultPage = async ({ params, searchParams,
         return (
             <>
                 {propertiesString}
-                <Test_GetFileSystemImage />
+                {/* <Test_GetFileSystemImage /> */}
                 <br></br>
                 <Imgsrc />
                 <Link href="/tracker">戻る</Link>

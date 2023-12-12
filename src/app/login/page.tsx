@@ -28,10 +28,10 @@ export default function Home() {
             body: JSON.stringify(loginstate),
         });
 
-        // const data = await res.json()
-        const data = await res.text();
+        const data = await res.json()
+        // const data = await res.text();
 
-        if (data === "1") {
+        if (data.message == "login success") {
             //setPostedData('OK')
             router.push("/home");
         } else {

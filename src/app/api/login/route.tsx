@@ -1,4 +1,4 @@
-import { LogDB } from './loginDB.js'
+import { LogDB } from './loginDB.tsx'
 
 export async function GET(request: Request) {
     return new Response(
@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 }
 
 type LoginInformation = {
-    username: string;
+    id: string;
     password: string;
 }
 
@@ -21,7 +21,7 @@ function isValidLoginInformation(data: any): data is LoginInformation {
     return (
         data &&
         typeof data === 'object' &&
-        typeof data.username === 'string' &&
+        typeof data.id === 'string' &&
         typeof data.password === 'string'
     );
 }
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
             },
         );
     }
-    const result = await LogDB(body.username, body.password);
+    const result = await LogDB(body.id, body.password);
     if (result) {
         return new Response(
             JSON.stringify({ message: 'login success' }),

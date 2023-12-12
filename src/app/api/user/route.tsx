@@ -1,4 +1,4 @@
-import { DB } from './DB.jsx'
+import { DB } from './DB.tsx'
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
