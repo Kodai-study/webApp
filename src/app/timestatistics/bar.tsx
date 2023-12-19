@@ -12,7 +12,7 @@ export const BarChart = ({ data }: { data: number[] }) => {
     labels: data.map((_, index) => `${index + 1}月`),
     datasets: [
       {
-        label: 'Data',
+        label: '毎月の加工数',
         data: data,
         backgroundColor: 'rgba(75,192,192,0.2)',
         borderColor: 'rgba(75,192,192,1)',

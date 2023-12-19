@@ -21,11 +21,11 @@ const Home = () => {
   }
   return (
     <>
-      <h1>統計データ</h1>
+      <h1>年加工数統計データ</h1>
       <BarChart data={chartData} />
-      <Button onClick={onClickhandler}>平均統計</Button>{' '}
+      <Button onClick={onClickhandler}>平均値</Button>{' '}
       <Button>最大値</Button>{' '}
-      <Button>最少値</Button>{' '}
+      <Button>最小値</Button>{' '}
       <Button>中央値</Button>{' '}
       <Button>標準偏差</Button>{' '}
       {showContents &&

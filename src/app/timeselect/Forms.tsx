@@ -8,6 +8,8 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 
 export default function Myform() {
+  const [startEvent, setStartEvent] = useState('');
+  const [stopEvent, setStopEvent] = useState('');
   const [message, setMessage] = useState('');
   const [startdateValue, setStartDateValue] = useState('');
   const [stopdateValue, setStopdateValue] = useState('');
@@ -16,12 +18,15 @@ export default function Myform() {
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (startdateValue == '' || starttimeValue == '' || stopdateValue == '' || stoptimeValue == '') {
+    if (startdateValue == '' || starttimeValue == '' ||
+      stopdateValue == '' || stoptimeValue == '' ||
+      startEvent == '' || startEvent == '') {
       setMessage('入力されていない値があります');
     }
     else {
-			router.push(`/test3?StartDateTime=${startdateValue} ${starttimeValue}
-			&StopDateTime=${stopdateValue} ${stoptimeValue}`);
+      router.push(`/test3?StartDateTime=${startdateValue} ${starttimeValue}
+                          &StopDateTime=${stopdateValue} ${stoptimeValue}
+                          &starte=${startEvent}&stope=${startEvent}`);
     }
     e.preventDefault();
   };
@@ -38,6 +43,14 @@ export default function Myform() {
   const stpotimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStopValue(e.target.value);
   };
+  const startEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStartEvent(e.target.value);
+  };
+  const stopEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStopEvent(e.target.value);
+  };
+
+
 
   return (
     <>
@@ -69,6 +82,19 @@ export default function Myform() {
                 name="stoptime"
                 value={stoptimeValue}
                 onChange={stpotimeChange} />
+              <Form.Label>イベント選択</Form.Label>
+              <Form.Select aria-label="イベント選択" onChange={startEventChange}>
+                <option value="">nothing</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
+              <Form.Select aria-label="Default select example" onChange={stopEventChange}>
+                <option value="">nothing</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
               <Button variant="primary" type='submit'>送信</Button>
             </Form.Group>
           </Form>
@@ -78,6 +104,8 @@ export default function Myform() {
       開始日時：{startdateValue} {starttimeValue}<br></br>
       終了日時：{stopdateValue} {stoptimeValue}<br></br>
       {message}<br></br>
+      {startEvent}<br></br>
+      {stopEvent}<br></br>
     </>
   );
 }
