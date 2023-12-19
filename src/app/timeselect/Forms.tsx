@@ -24,11 +24,16 @@ export default function Myform() {
       setMessage('入力されていない値があります');
     }
     else {
-      router.push(`/test3?StartDateTime=${startdateValue} ${starttimeValue}
-                          &StopDateTime=${stopdateValue} ${stoptimeValue}
-                          &starte=${startEvent}&stope=${startEvent}`);
-    }
-    e.preventDefault();
+      const queryParams = new URLSearchParams({
+        StartDateTime: `${startdateValue} ${starttimeValue}`,
+        StopDateTime: `${stopdateValue} ${stoptimeValue}`,
+        starte: startEvent,
+        stope: stopEvent
+      });
+
+      router.push(`/test3?${queryParams}`);
+      e.preventDefault();
+    };
   };
 
   const startdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,10 +48,10 @@ export default function Myform() {
   const stpotimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStopValue(e.target.value);
   };
-  const startEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const startEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStartEvent(e.target.value);
   };
-  const stopEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const stopEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStopEvent(e.target.value);
   };
 
