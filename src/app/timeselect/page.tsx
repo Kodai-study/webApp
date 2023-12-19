@@ -1,4 +1,4 @@
-import Myform from './Forms.tsx'
+import Myform from './Forms'
 
 export default function App(){
     return(

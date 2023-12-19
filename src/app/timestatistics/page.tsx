@@ -1,10 +1,10 @@
 "use client"
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { BarChart, BarChart2 } from './bar';
 import Button from 'react-bootstrap/Button';
 
 //乱数生成機
-function getRandomInt(min, max) {
+function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
