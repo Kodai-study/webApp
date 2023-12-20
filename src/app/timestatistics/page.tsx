@@ -10,8 +10,8 @@ function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 // 10 個の乱数を持つ配列を生成する
-const randomNumbersArray = Array.from({ length: 10 }, () => getRandomInt(44000, 52000));
-const randomNumbersArray2 = Array.from({ length: 10 }, () => getRandomInt(48, 52));
+const randomNumbersArray = Array.from({ length: 12 }, () => getRandomInt(44000, 52000));
+const randomNumbersArray2 = Array.from({ length: 12 }, () => getRandomInt(48, 52));
 const Home = () => {
   const chartData = randomNumbersArray;
   const chartData2 = randomNumbersArray2;
