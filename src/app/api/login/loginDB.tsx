@@ -3,11 +3,11 @@ import * as mysql from 'promise-mysql';
 //ログイン用データベース接続API
 export async function LogDB(id: string, pass: string) {
   const connection = await mysql.createConnection({
-    host: '192.168.16.101',
-    port: 3306,
-    database: 'test',
-    user: 'test',
-    password: 'test'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
   });
   //社員番号とパスワード入力⇒持ってくるもの：名前　社員番号　パスワード　権限
   const sql = '\

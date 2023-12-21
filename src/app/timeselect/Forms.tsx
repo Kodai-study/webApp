@@ -30,10 +30,9 @@ export default function Myform() {
         starte: startEvent,
         stope: stopEvent
       });
-
       router.push(`/test3?${queryParams}`);
-      e.preventDefault();
     };
+    e.preventDefault();
   };
 
   const startdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
