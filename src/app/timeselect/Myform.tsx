@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
+import Select from './Select';
+
 
 export default function Myform() {
   const [startEvent, setStartEvent] = useState('');
@@ -47,15 +49,6 @@ export default function Myform() {
   const stpotimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStopValue(e.target.value);
   };
-  const startEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setStartEvent(e.target.value);
-  };
-  const stopEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setStopEvent(e.target.value);
-  };
-
-
-
   return (
     <>
       <Container>
@@ -86,19 +79,7 @@ export default function Myform() {
                 name="stoptime"
                 value={stoptimeValue}
                 onChange={stpotimeChange} />
-              <Form.Label>イベント選択</Form.Label>
-              <Form.Select aria-label="イベント選択" onChange={startEventChange}>
-                <option value="">nothing</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
-              <Form.Select aria-label="Default select example" onChange={stopEventChange}>
-                <option value="">nothing</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <Select setStartEventHandler={setStartEvent} setStopEventHandler={setStopEvent}/>
               <Button variant="primary" type='submit'>送信</Button>
             </Form.Group>
           </Form>
@@ -108,8 +89,8 @@ export default function Myform() {
       開始日時：{startdateValue} {starttimeValue}<br></br>
       終了日時：{stopdateValue} {stoptimeValue}<br></br>
       {message}<br></br>
-      {startEvent}<br></br>
-      {stopEvent}<br></br>
+      {startEvent}
+      {stopEvent}
     </>
   );
 }

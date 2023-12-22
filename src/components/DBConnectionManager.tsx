@@ -1,7 +1,4 @@
-// db.ts with connection pool
 import * as mysql from 'promise-mysql';
-
-const DATABASE_HOST = '192.168.16.101';
 
 class ConnectionPool {
     private static instance: mysql.Pool;
@@ -11,11 +8,11 @@ class ConnectionPool {
     static async getInstance(): Promise<mysql.Pool> {
         if (!ConnectionPool.instance) {
             ConnectionPool.instance = await mysql.createPool({
-                host: DATABASE_HOST,
-                port: 3306,
-                database: 'test',
-                user: 'test',
-                password: 'test',
+                host: process.env.DB_HOST,
+                port: process.env.DB_PORT,
+                database: process.env.DB_NAME,
+                user: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
                 waitForConnections: true,
                 connectionLimit: 10,
                 queueLimit: 0
@@ -25,25 +22,7 @@ class ConnectionPool {
     }
 }
 
-let pool: mysql.Pool | null = null;
-async function getConectionPool() {
-    return await mysql.createPool({
-        host: DATABASE_HOST,
-        port: 3306,
-        database: 'test',
-        user: 'test',
-        password: 'test',
-        waitForConnections: true,
-        connectionLimit: 10,
-        queueLimit: 0
-    });
-}
-
 export const getDBConnection = async () => {
-    // if (pool == null) {
-    //     pool = await getConectionPool();
-    // }
     const connection = await ConnectionPool.getInstance();
     return await connection.getConnection();
-
 };

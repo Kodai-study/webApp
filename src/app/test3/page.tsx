@@ -19,6 +19,17 @@ const ResultPage = async ({ searchParams }: {
   const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
   return (
     <>
+     {re.map((item, index) => {
+        const keys = Object.keys(item);
+        const propertiesString = keys.map(key => `${key}: ${item[key]}`).join(', ');
+
+        return (
+          <div key={index}>
+            {propertiesString}<br />
+          </div>
+        );
+      })}
+
     {searchParams.StartDateTime}
     {propertiesString}<br></br>
       <Link href="/timeselect">戻る</Link>
