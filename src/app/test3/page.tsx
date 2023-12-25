@@ -1,25 +1,39 @@
-import DB from "./DB"
-import Link from 'next/link';
+//完全感覚サーバーサード
+import Link from 'next/link'
+import { getDBConnection } from '@/components/DBConnectionManager';
+
+//データベース接続
+async function DB(SDT: string, EDT: string, SE: string, EE: string) {
+  const connection = await getDBConnection();
+  const changedatetime = new Date(SDT);
+  const aaa = 0;
+  //const sql = `SELECT * FROM t_event WHERE event_datetime >= \'\ ${changedatetime} \'\ `;
+  const sql = `SELECT * FROM t_event WHERE event_datetime >= 1000 `;
+  //クエリ代入
+  const result = await connection.query(sql);
+  return result;
+}
 
 type SearchParams = {
   StartDateTime: string;
-  StopDateTime: string;
-  starte: string;
-  stope: string;
+  EndDateTime: string;
+  StartEvent: string;
+  EndEvent: string;
 };
 
 const ResultPage = async ({ searchParams }: {
   searchParams: SearchParams;
 }) => {
-   const re = await DB(searchParams.StartDateTime);
-  //   searchParams.StopDateTime,
-  //   searchParams.starte,
-  //   searchParams.stope,)
-  const keys = Object.keys(re[0]);
-  const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
+  const result = await DB(searchParams.StartDateTime,
+    searchParams.EndDateTime,
+    searchParams.StartEvent,
+    searchParams.EndEvent);
+    
+  const keys = Object.keys(result[0]);
+  const propertiesString = keys.map(key => `${key}: ${result[0][key]}`).join(', ');
   return (
     <>
-     {re.map((item, index) => {
+      {result.map((item, index) => {
         const keys = Object.keys(item);
         const propertiesString = keys.map(key => `${key}: ${item[key]}`).join(', ');
 
@@ -30,8 +44,8 @@ const ResultPage = async ({ searchParams }: {
         );
       })}
 
-    {searchParams.StartDateTime}
-    {propertiesString}<br></br>
+      {searchParams.StartDateTime}
+      {propertiesString}<br></br>
       <Link href="/timeselect">戻る</Link>
     </>
   )
