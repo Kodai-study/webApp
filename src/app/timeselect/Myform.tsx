@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Select from './Select';
 
 
-export default function Myform() {
+export default function Myform(props) {
   const [startEvent, setStartEvent] = useState('');
   const [stopEvent, setStopEvent] = useState('');
   const [message, setMessage] = useState('');
@@ -20,20 +20,20 @@ export default function Myform() {
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (startdateValue == '' || starttimeValue == '' ||
-      stopdateValue == '' || stoptimeValue == '' ||
-      startEvent == '' || startEvent == '') {
-      setMessage('入力されていない値があります');
-    }
-    else {
-      const queryParams = new URLSearchParams({
-        StartDateTime: `${startdateValue} ${starttimeValue}`,
-        StopDateTime: `${stopdateValue} ${stoptimeValue}`,
-        starte: startEvent,
-        stope: stopEvent
-      });
-      router.push(`/test3?${queryParams}`);
-    };
+    // if (startdateValue == '' || starttimeValue == '' ||
+    //   stopdateValue == '' || stoptimeValue == '' ||
+    //   startEvent == '' || startEvent == '') {
+    //   setMessage('入力されていない値があります');
+    // }
+    // else {
+    const queryParams = new URLSearchParams({
+      StartDateTime: `${startdateValue} ${starttimeValue}`,
+      StopDateTime: `${stopdateValue} ${stoptimeValue}`,
+      starte: startEvent,
+      stope: stopEvent
+    });
+    router.push(`/test3?${queryParams}`);
+    // };
     e.preventDefault();
   };
 
@@ -79,7 +79,10 @@ export default function Myform() {
                 name="stoptime"
                 value={stoptimeValue}
                 onChange={stpotimeChange} />
-              <Select setStartEventHandler={setStartEvent} setStopEventHandler={setStopEvent}/>
+              <Select props={props.props}
+                setStartEventHandler={setStartEvent}
+                setStopEventHandler={setStopEvent}>
+              </Select>
               <Button variant="primary" type='submit'>送信</Button>
             </Form.Group>
           </Form>
