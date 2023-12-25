@@ -20,12 +20,12 @@ export default function Myform(props) {
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // if (startdateValue == '' || starttimeValue == '' ||
-    //   stopdateValue == '' || stoptimeValue == '' ||
-    //   startEvent == '' || startEvent == '') {
-    //   setMessage('入力されていない値があります');
-    // }
-    // else {
+    if (startdateValue == '' || starttimeValue == '' ||
+      stopdateValue == '' || stoptimeValue == '' ||
+      startEvent == '' || startEvent == '') {
+      setMessage('入力されていない値があります');
+    }
+    else {
     const queryParams = new URLSearchParams({
       StartDateTime: `${startdateValue} ${starttimeValue}`,
       StopDateTime: `${stopdateValue} ${stoptimeValue}`,
@@ -33,12 +33,12 @@ export default function Myform(props) {
       stope: stopEvent
     });
     router.push(`/test3?${queryParams}`);
-    // };
+    };
     e.preventDefault();
   };
 
   const startdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStartDateValue(e.target.value);
+    setStartDateValue(e.target.value);0
   };
   const stopdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStopdateValue(e.target.value);
@@ -49,6 +49,7 @@ export default function Myform(props) {
   const stpotimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStopValue(e.target.value);
   };
+
   return (
     <>
       <Container>
@@ -92,7 +93,7 @@ export default function Myform(props) {
       開始日時：{startdateValue} {starttimeValue}<br></br>
       終了日時：{stopdateValue} {stoptimeValue}<br></br>
       {message}<br></br>
-      {startEvent}
+      {startEvent}<br></br>
       {stopEvent}
     </>
   );

@@ -16,11 +16,13 @@ export default function Select(props) {
       <Form.Group controlId="dateform">
         <Form.Label>イベント選択</Form.Label>
         <Form.Select aria-label="イベント選択" onChange={startEventChange}>
+          <option value="">----</option>
           {list.map((option, index) => (
             <option key={index} value={option.process_id}>{option.process_name}</option>
           ))}
         </Form.Select>
         <Form.Select aria-label="イベント選択2" onChange={stopEventChange}>
+          <option value="">----</option>
           {list.map((option, index) => (
             <option key={index} value={option.process_id}>{option.process_name}</option>
           ))}
