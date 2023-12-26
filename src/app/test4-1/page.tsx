@@ -5,7 +5,8 @@ import { getDBConnection } from '@/components/DBConnectionManager';
 //データベース接続
 async function DB(SDT: string, EDT: string, SE: string, EE: string) {
   const connection = await getDBConnection();
-  const sql = "SELECT * FROM t_event WHERE event_datetime BETWEEN ? AND ? ORDER BY event_datetime ASC;"
+  //const sql = "SELECT judgment FROM m_work WHERE processing_date BETWEEN ? AND ? ORDER BY processing_date ASC;"
+  const sql = "SELECT * FROM m_work WHERE processing_date BETWEEN ? AND ? ORDER BY processing_date ASC;"
   //クエリ代入
   const result = await connection.query(sql,[SDT,EDT]);
   return result;

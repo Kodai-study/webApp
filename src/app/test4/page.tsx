@@ -1,5 +1,4 @@
 import Myform from './Myform';
-import Select from './Select'
 import { getDBConnection } from '../.././components/DBConnectionManager'
 
 export default async function App() {

@@ -6,12 +6,9 @@ import Col from 'react-bootstrap/Col';
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
-import Select from './Select';
 
 
 export default function Myform(props) {
-  const [StartEvent, setStartEvent] = useState('');
-  const [EndEvent, setEndEvent] = useState('');
   const [message, setMessage] = useState('');
   const [startdateValue, setStartDateValue] = useState('');
   const [enddateValue, setEndDateValue] = useState('');
@@ -21,24 +18,21 @@ export default function Myform(props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (startdateValue == '' || starttimeValue == '' ||
-      enddateValue == '' || endtimeValue == '' ||
-      StartEvent == '' || StartEvent == '') {
+      enddateValue == '' || endtimeValue == '') {
       setMessage('入力されていない値があります');
     }
     else {
-    const queryParams = new URLSearchParams({
-      StartDateTime: `${startdateValue} ${starttimeValue}`,
-      EndDateTime: `${enddateValue} ${endtimeValue}`,
-      StartEvent: StartEvent,
-      EndEvent: EndEvent
-    });
-    router.push(`/test3?${queryParams}`);
+      const queryParams = new URLSearchParams({
+        StartDateTime: `${startdateValue} ${starttimeValue}`,
+        EndDateTime: `${enddateValue} ${endtimeValue}`
+      });
+      router.push(`/test4-1?${queryParams}`);
     };
     e.preventDefault();
   };
 
   const startdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStartDateValue(e.target.value);0
+    setStartDateValue(e.target.value); 0
   };
   const enddateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEndDateValue(e.target.value);
@@ -80,10 +74,6 @@ export default function Myform(props) {
                 name="endtime"
                 value={endtimeValue}
                 onChange={stpotimeChange} />
-              <Select props={props.props}
-                setStartEventHandler={setStartEvent}
-                setEndEventHandler={setEndEvent}>
-              </Select>
               <Button variant="primary" type='submit'>送信</Button>
             </Form.Group>
           </Form>
@@ -93,8 +83,6 @@ export default function Myform(props) {
       開始日時：{startdateValue} {starttimeValue}<br></br>
       終了日時：{enddateValue} {endtimeValue}<br></br>
       {message}<br></br>
-      {StartEvent}<br></br>
-      {EndEvent}
     </>
   );
 }

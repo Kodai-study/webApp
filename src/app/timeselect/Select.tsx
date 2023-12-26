@@ -4,12 +4,12 @@ import Form from 'react-bootstrap/Form';
 export default function Select(props) {
   const list = props.props
 
-  const { setStartEventHandler, setStopEventHandler } = props
+  const { setStartEventHandler, setEndEventHandler } = props
   const startEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStartEventHandler(e.target.value);
   };
-  const stopEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setStopEventHandler(e.target.value);
+  const endEventChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setEndEventHandler(e.target.value);
   };
   return (
     <>
@@ -21,7 +21,7 @@ export default function Select(props) {
             <option key={index} value={option.process_id}>{option.process_name}</option>
           ))}
         </Form.Select>
-        <Form.Select aria-label="イベント選択2" onChange={stopEventChange}>
+        <Form.Select aria-label="イベント選択2" onChange={endEventChange}>
           <option value="">----</option>
           {list.map((option, index) => (
             <option key={index} value={option.process_id}>{option.process_name}</option>
