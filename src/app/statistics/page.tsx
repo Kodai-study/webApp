@@ -1,14 +1,32 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 export default function Page() {
     return (
         <div>
-            <h1>統計データ</h1>
-            <Link href="/timeselect">加工時間統計</Link>
-            <br></br>
-            <Link href="/quantityselect">加工数統計</Link>
+            <Container>
+                <h1>統計データ</h1>
+                <Row>
+                    <Col>
+                        <br></br>
+                        <Link href="/timeselect">
+                            <Button variant="primary">加工時間統計</Button>{' '}
+                        </Link>
+                    </Col>
+                    <Col>
+                        <br></br>
+                        <Link href="/quantityselect">
+                            <Button variant="primary">加工数統計</Button>{' '}
+                        </Link>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 }

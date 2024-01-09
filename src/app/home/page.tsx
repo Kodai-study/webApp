@@ -1,27 +1,44 @@
 import React from 'react';
 import Link from 'next/link';
-import style from '../test.module.css';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function home() {
     return (
-        <div className={style.container}>
-            <h1 className={style.h1}>HOME</h1>
-            <br></br>
-            <Link href="/tracker">
-                製品追跡
-            </Link>
-            <br></br>
-            <Link href="/statistics">
-                統計データ
-            </Link>
-            <br></br>
-            <Link href="/webcam">
-                監視カメラ
-            </Link>
-            <br></br>
-            <Link href="/users">
-                ユーザー管理
-            </Link>
-        </div>
+        <>
+            <Container>
+                <h1>HOME</h1>
+                <Row>
+                    <Col>
+                        <br></br>
+                        <Link href="/tracker">
+                            <Button variant="primary">製品追跡</Button>{' '}
+                        </Link>
+                    </Col>
+                    <Col>
+                        <br></br>
+                        <Link href="/statistics">
+                            <Button variant="primary">統計データ</Button>{' '}
+                        </Link>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <br></br>
+                        <Link href="/webcam">
+                            <Button variant="primary">監視カメラ</Button>{' '}
+                        </Link>
+                    </Col>
+                    <Col>
+                        <br></br>
+                        <Link href="/users">
+                            <Button variant="primary">ユーザー管理</Button>{' '}
+                        </Link>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 }
