@@ -51,6 +51,7 @@ const ResultPage = async ({ params, searchParams,
         const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
         return (
             <>
+                <h1>検索結果</h1>
                 {propertiesString}
                 {/* <Test_GetFileSystemImage /> */}
                 <br></br>
@@ -69,6 +70,7 @@ const ResultPage = async ({ params, searchParams,
         }
         return (
             <>
+                <h1>検索結果</h1>
                 {errorMessage}
                 <br></br>
                 <Link href="/tracker">戻る</Link>

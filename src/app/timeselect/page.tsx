@@ -1,6 +1,9 @@
 import Myform from './Myform';
 import Select from './Select'
 import { getDBConnection } from '../.././components/DBConnectionManager'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default async function App() {
 
@@ -18,7 +21,10 @@ export default async function App() {
 
   return (
     <>
-      <Myform props={simplifiedResult}></Myform>
+      <Container>
+        <h1>日時選択</h1><br />
+        <Myform props={simplifiedResult}></Myform>
+      </Container>
     </>
   );
 }

@@ -5,6 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useRouter } from "next/navigation";
 
 
+
 const InputSerialNumber = () => {
     const [inputValue, setInputValue] = useState('');
     const router = useRouter();

@@ -56,9 +56,6 @@ export function QrCaputure() {
 
   return (
     <>
-      <header>
-        <h1>製品追跡</h1>
-      </header>
       {isCaptureEnable || (
         <Button variant="primary" onClick={() => setCaptureEnable(true)}>撮影する</Button>
       )}

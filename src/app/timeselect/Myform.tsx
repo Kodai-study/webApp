@@ -32,7 +32,7 @@ export default function Myform(props) {
       StartEvent: StartEvent,
       EndEvent: EndEvent
     });
-    router.push(`/test3?${queryParams}`);
+    router.push(`/tselectresult?${queryParams}`);
     };
     e.preventDefault();
   };

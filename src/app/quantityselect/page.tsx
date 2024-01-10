@@ -20,7 +20,7 @@ export default function Myform() {
       setMessage('入力されていない値があります');
     }
     else {
-			router.push(`/test3?StartDateTime=${startdateValue} ${starttimeValue}
+      router.push(`/qselectresult?StartDateTime=${startdateValue} ${starttimeValue}
 			&StopDateTime=${stopdateValue} ${stoptimeValue}`);
     }
     e.preventDefault();
@@ -42,6 +42,7 @@ export default function Myform() {
   return (
     <>
       <Container>
+        <h1>日時選択</h1>
         <Row>
           <Col xs></Col>
           <Col xs={{ order: 12 }}></Col>
@@ -74,10 +75,11 @@ export default function Myform() {
           </Form>
           <Col xs={{ order: 4 }}></Col>
         </Row>
+        開始日時：{startdateValue} {starttimeValue}<br></br>
+        終了日時：{stopdateValue} {stoptimeValue}<br></br>
+        {message}<br></br>
       </Container>
-      開始日時：{startdateValue} {starttimeValue}<br></br>
-      終了日時：{stopdateValue} {stoptimeValue}<br></br>
-      {message}<br></br>
+
     </>
   );
 }
