@@ -32,15 +32,15 @@ export const data = {
 };
 
 // dataのデータを表示させる
-export default function Chart() {
+export default function Chart(Qdata) {
   return (
     <div>
-      <Pie data={data}
-        width={400}
-        height={400}
-        options={{ maintainAspectRatio: false }}
-
-      />
-    </div>
+        <Pie data={data}
+          width={400}
+          height={400}
+          options={{ maintainAspectRatio: false }}
+        />
+        {Qdata}
+    </div >
   );
 }

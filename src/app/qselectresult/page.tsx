@@ -2,14 +2,15 @@
 import Link from 'next/link'
 import { getDBConnection } from '@/components/DBConnectionManager';
 import Button from 'react-bootstrap/Button';
+import Chart from './chart.tsx';
+import Container from 'react-bootstrap/Container';
 
 //データベース接続
 async function DB(SDT: string, EDT: string) {
   const connection = await getDBConnection();
-  const sql = "SELECT * FROM t_event ASC;"
+  const sql = "SELECT judgment, COUNT(*) as count FROM m_work WHERE processing_date >= ? AND processing_date <= ? GROUP BY judgment;"
   //クエリ代入
-  const result = await connection.query(sql);
-  //, [SDT, EDT]
+  const result = await connection.query(sql, [SDT, EDT]);
   return result;
 }
 
@@ -53,18 +54,26 @@ const ResultPage = async ({ searchParams }: {
       </div>
     );
   })
-
+  const simplifiedData = result.map((row) => ({
+    judgment: row.judgment,
+    count: row.count,
+  }));
 
   return (
     <>
-      <h1>検索結果</h1>
-      {selectres}
-      <br />
-      {searchParams.StartDateTime}
-      <br />
-      <Link href="/timeselect">
-        <Button variant="primary">戻る</Button>{' '}
-      </Link>
+      <Container>
+        <h1>検索結果</h1>
+        {selectres}
+        <br />
+        {searchParams.StartDateTime}
+        <br />
+        {searchParams.EndDateTime}
+        <br />
+        <Link href="/timeselect">
+          <Button variant="primary">戻る</Button>{' '}
+        </Link>
+        <Chart Qdata={simplifiedData}></Chart>
+      </Container>
     </>
   )
 }

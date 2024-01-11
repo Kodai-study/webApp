@@ -21,7 +21,7 @@ export default function Myform() {
     }
     else {
       router.push(`/qselectresult?StartDateTime=${startdateValue} ${starttimeValue}
-			&StopDateTime=${stopdateValue} ${stoptimeValue}`);
+			&EndDateTime=${stopdateValue} ${stoptimeValue}`);
     }
     e.preventDefault();
   };
