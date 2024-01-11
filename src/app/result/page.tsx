@@ -2,6 +2,8 @@ import DBGet1Colum from "./DB"
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import fs from 'fs';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 const Imgsrc = () => {
 
@@ -51,12 +53,16 @@ const ResultPage = async ({ params, searchParams,
         const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
         return (
             <>
-                <h1>検索結果</h1>
-                {propertiesString}
-                {/* <Test_GetFileSystemImage /> */}
-                <br></br>
-                <Imgsrc />
-                <Link href="/tracker">戻る</Link>
+                <Container>
+                    <h1>検索結果</h1>
+                    {propertiesString}
+                    {/* <Test_GetFileSystemImage /> */}
+                    <br></br>
+                    <Imgsrc />
+                    <Link href="/tracker">
+                        <Button variant="primary" type='submit'>戻る</Button>
+                    </Link>
+                </Container>
             </>
         )
     }
@@ -70,10 +76,14 @@ const ResultPage = async ({ params, searchParams,
         }
         return (
             <>
-                <h1>検索結果</h1>
-                {errorMessage}
-                <br></br>
-                <Link href="/tracker">戻る</Link>
+                <Container>
+                    <h1>検索結果</h1>
+                    {errorMessage}
+                    <br></br>
+                    <Link href="/tracker">
+                        <Button variant="primary" type='submit'>戻る</Button>
+                    </Link>
+                </Container>
             </>
         )
     }

@@ -13,7 +13,7 @@ function Cam({ streamNumber, children }: CamProps) {
     return (
         <div>
             {children}
-            <img src={`https://192.168.16.101:1919/?action=stream_${streamNumber}`} />
+            <img src={`http://192.168.16.101:8080/?action=stream_${streamNumber}`} />
         </div>
     );
 }

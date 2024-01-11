@@ -1,14 +1,15 @@
-//完全感覚サーバーサード
+//サーバーサードプログラム
 import Link from 'next/link'
 import { getDBConnection } from '@/components/DBConnectionManager';
 import Button from 'react-bootstrap/Button';
 
 //データベース接続
-async function DB(SDT: string, EDT: string, SE: string, EE: string) {
+async function DB(SDT: string, EDT: string) {
   const connection = await getDBConnection();
-  const sql = "SELECT * FROM t_event WHERE event_datetime BETWEEN ? AND ? ORDER BY event_datetime ASC;"
+  const sql = "SELECT * FROM t_event ASC;"
   //クエリ代入
-  const result = await connection.query(sql, [SDT, EDT]);
+  const result = await connection.query(sql);
+  //, [SDT, EDT]
   return result;
 }
 
@@ -22,10 +23,7 @@ type SearchParams = {
 const ResultPage = async ({ searchParams }: {
   searchParams: SearchParams;
 }) => {
-  const result = await DB(searchParams.StartDateTime,
-    searchParams.EndDateTime,
-    searchParams.StartEvent,
-    searchParams.EndEvent);
+  const result = await DB(searchParams.StartDateTime, searchParams.EndDateTime);
 
   try {
     if (!result.length) {
