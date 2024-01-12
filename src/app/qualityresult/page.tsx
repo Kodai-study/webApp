@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 //データベース接続
 async function DB(SDT: string, EDT: string) {
   const connection = await getDBConnection();
-  const sql = "SELECT judgment, COUNT(*) as count FROM m_work WHERE processing_date >= ? AND processing_date <= ? GROUP BY judgment;"
+  const sql = "SELECT judgment, COUNT(*) as count FROM m_work WHERE processing_date >= '2020-01-01' AND processing_date <= '2030-01-01' GROUP BY judgment ORDER BY judgment IS NULL, judgment;"
   //クエリ代入
   const result = await connection.query(sql, [SDT, EDT]);
   return result;
@@ -62,7 +62,7 @@ const ResultPage = async ({ searchParams }: {
   return (
     <>
       <Container>
-        <h1>良品、不良品率</h1>
+        <h1>良品統計率</h1>
         <br />
         <h4>{searchParams.StartDateTime} ~ {searchParams.EndDateTime}のデータ</h4>
         <br />

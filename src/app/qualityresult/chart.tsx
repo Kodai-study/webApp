@@ -13,8 +13,8 @@ export default function Chart(props) {
     datasets: [
       {
         data: [],
-        backgroundColor: ['red', 'blue', '#FFCE56'], // それぞれのセクションの色
-        hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+        backgroundColor: ['#ff7f7f', '#7fbfff', '#808080'], // それぞれのセクションの色
+        hoverBackgroundColor: ['#ff7f7f', '#7fbfff', '#808080'],
       },
     ],
   };

@@ -25,6 +25,12 @@ export default function Page() {
                             <Button variant="primary">加工数統計</Button>{' '}
                         </Link>
                     </Col>
+                    <Col>
+                        <br></br>
+                        <Link href="/qualityselect">
+                            <Button variant="primary">良品率統計</Button>{' '}
+                        </Link>
+                    </Col>
                 </Row>
             </Container>
         </div>
