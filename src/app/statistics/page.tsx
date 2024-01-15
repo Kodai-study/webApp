@@ -32,6 +32,10 @@ export default function Page() {
                         </Link>
                     </Col>
                 </Row>
+                <br/>
+                <Link href="/home">
+                    <Button variant="primary">戻る</Button>{' '}
+                </Link>
             </Container>
         </div>
     );

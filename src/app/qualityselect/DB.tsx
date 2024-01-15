@@ -1,14 +1,15 @@
-//完全感覚サーバーサード
+//サーバーサードプログラム
 import Link from 'next/link'
 import { getDBConnection } from '@/components/DBConnectionManager';
+import Chart from './chart.tsx';
+import Container from 'react-bootstrap/Container';
 
 //データベース接続
-async function DB(SDT: string, EDT: string, SE: string, EE: string) {
+async function DB() {
   const connection = await getDBConnection();
-  //const sql = "SELECT judgment FROM m_work WHERE processing_date BETWEEN ? AND ? ORDER BY processing_date ASC;"
-  const sql = "SELECT * FROM m_work WHERE processing_date BETWEEN ? AND ? ORDER BY processing_date ASC;"
+  const sql = "SELECT judgment, COUNT(*) as count FROM m_work GROUP BY judgment ORDER BY judgment IS NULL, judgment;"
   //クエリ代入
-  const result = await connection.query(sql,[SDT,EDT]);
+  const result = await connection.query(sql);
   return result;
 }
 
@@ -22,10 +23,7 @@ type SearchParams = {
 const ResultPage = async ({ searchParams }: {
   searchParams: SearchParams;
 }) => {
-  const result = await DB(searchParams.StartDateTime,
-    searchParams.EndDateTime,
-    searchParams.StartEvent,
-    searchParams.EndEvent);
+  const result = await DB();
 
   try {
     if (!result.length) {
@@ -51,19 +49,21 @@ const ResultPage = async ({ searchParams }: {
     const propertiesString = keys.map(key => `${key}: ${item[key]}`).join(', ');
     return (
       <div key={index}>
-        {propertiesString}<br/>
+        {propertiesString}<br />
       </div>
     );
   })
-
+  const simplifiedData = result.map((row) => ({
+    judgment: row.judgment,
+    count: row.count,
+  }));
 
   return (
     <>
-      {selectres}
-      <br/>
-      {searchParams.StartDateTime}
-      <br/>
-      <Link href="/timeselect">戻る</Link>
+      <Container>
+        <h1>良品統計率</h1>
+        <Chart Qdata={simplifiedData}></Chart>
+      </Container>
     </>
   )
 }

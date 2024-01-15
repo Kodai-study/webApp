@@ -1,37 +1,36 @@
 //サーバーサードプログラム
 import Link from 'next/link'
 import { getDBConnection } from '@/components/DBConnectionManager';
-import Button from 'react-bootstrap/Button';
 import Chart from './chart.tsx';
 import Container from 'react-bootstrap/Container';
 
 //データベース接続
-async function DB(SDT: string, EDT: string) {
+async function DB() {
   const connection = await getDBConnection();
-  const sql = "SELECT judgment, COUNT(*) as count FROM m_work WHERE processing_date >= ? AND processing_date <= ? GROUP BY judgment ORDER BY judgment IS NULL, judgment;"
+  const sql = "SELECT judgment, COUNT(*) as count FROM m_work GROUP BY judgment ORDER BY judgment IS NULL, judgment;"
   //クエリ代入
-  const result = await connection.query(sql, [SDT, EDT]);
+  const result = await connection.query(sql);
   return result;
 }
 
 type SearchParams = {
   StartDateTime: string;
   EndDateTime: string;
+  StartEvent: string;
+  EndEvent: string;
 };
 
 const ResultPage = async ({ searchParams }: {
   searchParams: SearchParams;
 }) => {
-  const result = await DB(searchParams.StartDateTime, searchParams.EndDateTime);
+  const result = await DB();
 
   try {
     if (!result.length) {
       return (
         <div>
           <p>データが見つかりませんでした。</p>
-          <Link href="/qualityselect">
-          <Button variant="primary">戻る</Button>{' '}
-        </Link>
+          <Link href="/timeselect">戻る</Link>
         </div>
       );
     }
@@ -40,9 +39,7 @@ const ResultPage = async ({ searchParams }: {
     return (
       <div>
         <p>データベースクエリエラーが発生しました。</p>
-        <Link href="/qualityselect">
-          <Button variant="primary">戻る</Button>{' '}
-        </Link>
+        <Link href="/timeselect">戻る</Link>
       </div>
     );
   }
@@ -64,14 +61,8 @@ const ResultPage = async ({ searchParams }: {
   return (
     <>
       <Container>
-        <h1>良品、不良品率</h1>
-        <br />
-        <h4>{searchParams.StartDateTime} ~ {searchParams.EndDateTime}のデータ</h4>
-        <br />
+        <h1>良品統計率</h1>
         <Chart Qdata={simplifiedData}></Chart>
-        <Link href="/qualityselect">
-          <Button variant="primary">戻る</Button>{' '}
-        </Link>
       </Container>
     </>
   )
