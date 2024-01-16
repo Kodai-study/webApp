@@ -2,6 +2,9 @@
 import { useState, useEffect } from 'react';
 import Graph from './Graph';
 import DateRangeForm from './DateRangeForm';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function StatisticsPage() {
   const [data, setData] = useState([]);
@@ -43,8 +46,10 @@ export default function StatisticsPage() {
 
   return (
     <div>
+      <Container>
       <DateRangeForm onSubmit={handleDateRangeSubmit} />
       <Graph data={data} />
+      </Container>
     </div>
   );
 }
