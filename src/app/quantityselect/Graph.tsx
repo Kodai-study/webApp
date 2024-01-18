@@ -8,7 +8,7 @@ const Graph = ({ data, aggregationMode }) => {
     labels: data.map(item => item.date), // または item.month
     datasets: [
       {
-        label: aggregationMode === 'daily' ? '日別カウント' : '月別カウント',
+        label: aggregationMode === 'daily' ? '日別カウント' : '日別カウント',
         data: data.map(item => item.count),
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
         borderColor: 'rgba(54, 162, 235, 1)',

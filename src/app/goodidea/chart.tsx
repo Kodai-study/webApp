@@ -14,12 +14,12 @@ export default function Chart(props) {
       {
         data: [],
         backgroundColor: ['red', 'blue', '#FFCE56'], // それぞれのセクションの色
-        hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+        hoverBackgroundColor: ['red', 'blue', '#FFCE56'],
       },
     ],
   };
   
-  props.Qdata.forEach((row) => {
+  props.data.forEach((row) => {
     data.labels.push(row.judgment === null ? 'null' : row.judgment === 0 ? '良品数' : '不良品数');
     data.datasets[0].data.push(row.count);
   });

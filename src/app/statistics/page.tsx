@@ -27,7 +27,7 @@ export default function Page() {
                     </Col>
                     <Col>
                         <br></br>
-                        <Link href="/qualityselect">
+                        <Link href="/goodidea">
                             <Button variant="primary">良品率統計</Button>{' '}
                         </Link>
                     </Col>
