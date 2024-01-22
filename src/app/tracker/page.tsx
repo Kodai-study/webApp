@@ -8,56 +8,75 @@ import Container from 'react-bootstrap/Container';
 import Link from 'next/link';
 
 const QRTestPage = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const [qrCodeText, setQRCodeText] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const webcamRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
   const router = useRouter();
 
   const handleCapture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImageSrc(imageSrc);
-    setQRCodeText("");
-    setFeedbackMessage("");
+    if (webcamRef.current !== null) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImageSrc(imageSrc);
+      setQRCodeText("");
+      setFeedbackMessage("");
+    } else {
+      console.log("CaptuerError")
+    }
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImageSrc(e.target.result);
-        setQRCodeText("");
-        setFeedbackMessage("");
-      };
-      reader.readAsDataURL(file);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target) {
+            setImageSrc(e.target.result);
+            setQRCodeText("");
+            setFeedbackMessage("");
+          }
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
   const handleAnalyzeClick = () => {
-    if (imageSrc) {
+    if (imageSrc && typeof imageSrc === 'string') {
       analyzeImage(imageSrc);
+    } else {
+      console.log("TypeError")
     }
   };
 
-  const analyzeImage = (imageSrc) => {
+  const analyzeImage = (imageSrc: string) => {
     const image = new Image();
     image.onload = () => {
       const canvas = document.createElement("canvas");
       canvas.width = image.width;
       canvas.height = image.height;
-      const context = canvas.getContext("2d");
-      context.drawImage(image, 0, 0, image.width, image.height);
-      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-
-      if (qrCode) {
-        setQRCodeText(qrCode.data);
-        setFeedbackMessage("QRコードが正常に検出されました。");
-      } else {
-        setQRCodeText("");
-        setFeedbackMessage("QRコードが見つかりませんでした。");
+      if (canvas) {
+        const context = canvas.getContext("2d");
+        if (context) {
+          context.drawImage(image, 0, 0, image.width, image.height);
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+          const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+          if (qrCode) {
+            setQRCodeText(qrCode.data);
+            setFeedbackMessage("QRコードが正常に検出されました。");
+          } else {
+            setQRCodeText("");
+            setFeedbackMessage("QRコードが見つかりませんでした。");
+          }
+        }
+        else {
+          console.log("ERROR")
+        }
       }
+      // context.drawImage(image, 0, 0, image.width, image.height);
+      // const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      // const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
     };
     image.src = imageSrc;
   };
@@ -82,7 +101,7 @@ const QRTestPage = () => {
             />
           </div>
 
-          {imageSrc && (
+          {typeof imageSrc == "string" && (
             <div className="mt-4">
               <p>キャプチャー画面</p>
               <img src={imageSrc} alt="Captured Image" style={{ width: '300px', height: 'auto' }} />

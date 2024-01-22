@@ -38,7 +38,7 @@ export default function StatisticsPage() {
     fetchData();
   }, [dateRange]);
 
-  const handleDateRangeSubmit = (e, startDate, endDate) => {
+  const handleDateRangeSubmit = (e: React.FormEvent<HTMLFormElement>, startDate: string, endDate: string) => {
     e.preventDefault();
     setDateRange({ startDate, endDate });
   };
@@ -47,7 +47,7 @@ export default function StatisticsPage() {
     <div>
       <Container>
         <h1>加工数統計データ</h1>
-        <Graph data={data} />
+        <Graph data={data} aggregationMode={'daily'} />
         <Select onSubmit={handleDateRangeSubmit} />
       </Container>
     </div>

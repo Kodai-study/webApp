@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { getDBConnection } from '@/components/DBConnectionManager';
 import Button from 'react-bootstrap/Button';
+import { Key } from 'react';
 
 //データベース接続
 async function DB(SDT: string, EDT: string, SE: string, EE: string) {
@@ -37,7 +38,11 @@ const ResultPage = async ({ searchParams }: {
       );
     }
   } catch (error) {
-    console.error("データベースクエリエラー:", error.message);
+    if (error instanceof Error) {
+      console.error("データベースクエリエラー:", error.message);
+    } else {
+      console.error("予期せぬエラーが発生しました。");
+    }
     return (
       <div>
         <p>データベースクエリエラーが発生しました。</p>
@@ -46,7 +51,7 @@ const ResultPage = async ({ searchParams }: {
     );
   }
 
-  const selectres = result.map((item, index) => {
+  const selectres = result.map((item: { [x: string]: any; }, index: Key | null | undefined) => {
     const keys = Object.keys(item);
     const propertiesString = keys.map(key => `${key}: ${item[key]}`).join(', ');
     return (

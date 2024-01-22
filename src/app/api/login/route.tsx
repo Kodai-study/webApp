@@ -1,4 +1,4 @@
-import { LogDB } from './loginDB.tsx'
+import { LogDB } from './loginDB'
 
 export async function GET(request: Request) {
     return new Response(

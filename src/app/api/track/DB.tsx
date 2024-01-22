@@ -1,14 +1,8 @@
-import * as mysql from 'promise-mysql';
+import { getDBConnection } from '@/components/DBConnectionManager';
 
 //ログイン用データベース接続API
 export async function LogDB(id: string, pass: string) {
-    const connection = await mysql.createConnection({
-        host: '192.168.16.101',
-        port: 3306,
-        database: 'test',
-        user: 'test',
-        password: 'test'
-    });
+    const connection = await getDBConnection();
     //社員番号とパスワード入力⇒持ってくるもの：名前　社員番号　パスワード　権限
     const sql = `
     SELECT employee_name, 

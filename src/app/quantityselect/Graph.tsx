@@ -3,7 +3,21 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const Graph = ({ data, aggregationMode }) => {
+type GraphDataItem = {
+  date: string; // または Date、必要に応じて型を変更
+  value: number;
+  count: number;
+  // 他のプロパティ...
+};
+
+type AggregationMode = 'daily' | 'monthly' | 'yearly'; // 例: aggregationMode の値として可能な文字列
+
+type GraphProps = {
+  data: GraphDataItem[];
+  aggregationMode: AggregationMode;
+};
+
+const Graph: React.FC<GraphProps> = ({ data, aggregationMode }) => {
   const chartData = {
     labels: data.map(item => item.date), // または item.month
     datasets: [

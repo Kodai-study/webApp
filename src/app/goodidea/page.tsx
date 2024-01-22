@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import Graph from './chart';
 import Container from 'react-bootstrap/Container';
 import Select from '@/components/select'
-import Link from 'next/link';
-import Button from 'react-bootstrap/Button';
 
 export default function StatisticsPage() {
   const [data, setData] = useState([]);
@@ -38,7 +36,7 @@ export default function StatisticsPage() {
     fetchData();
   }, [dateRange]);
 
-  const handleDateRangeSubmit = (e, startDate, endDate) => {
+  const handleDateRangeSubmit = (e: React.FormEvent<HTMLFormElement>, startDate: string, endDate: string) => {
     e.preventDefault();
     setDateRange({ startDate, endDate });
   };

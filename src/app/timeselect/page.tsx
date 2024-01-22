@@ -1,9 +1,6 @@
 import Myform from './Myform';
-import Select from './Select'
-import { getDBConnection } from '../.././components/DBConnectionManager'
+import { getDBConnection } from '@/components/DBConnectionManager'
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 export default async function App() {
 
@@ -13,7 +10,7 @@ export default async function App() {
 
   const result = await connection.query(sql);
 
-  const simplifiedResult = result.map(row => ({
+  const simplifiedResult = result.map((row: { process_id: any; process_name: any; }) => ({
     process_id: row.process_id,
     process_name: row.process_name
     // 他の必要なプロパティがあれば同様に追加する

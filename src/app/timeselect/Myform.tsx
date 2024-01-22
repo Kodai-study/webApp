@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Select from './Select';
 
 
-export default function Myform(props) {
+export default function Myform(props: { props: any; }) {
   const [StartEvent, setStartEvent] = useState('');
   const [EndEvent, setEndEvent] = useState('');
   const [message, setMessage] = useState('');

@@ -2,7 +2,23 @@
 
 import { Calendar, Factory, Truck, Tag, Cpu } from 'lucide-react';
 
-const ProductDisplay = ({ productData }) => {
+type ProductData = {
+  name: string;
+  price: number;
+  description: string;
+  serial_number: number;
+  model_name: string;
+  maker_name: string;
+  factory_name: string;
+  processing_date: string;
+  judgment: number;
+};
+
+type ProductDisplayProps = {
+  productData: ProductData;
+};
+
+const ProductDisplay: React.FC<ProductDisplayProps> = ({ productData }) => {
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white rounded-xl shadow-lg">
       <div className="flex flex-col items-center">
@@ -32,7 +48,7 @@ const ProductDisplay = ({ productData }) => {
 
         <div className="mt-3 flex items-center">
           <Calendar className="mr-3" size={20} />
-          <span>出荷日: </span>{productData.processing_date.toLocaleDateString()}
+          <span>出荷日: </span>{productData.processing_date}
         </div>
 
         <div className="mt-3 flex items-center">

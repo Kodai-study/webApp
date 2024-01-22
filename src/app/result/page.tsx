@@ -24,11 +24,13 @@ const ResultPage = async ({ params, searchParams,
         }
         const re = await DBGet1Colum(searchParams.no)
 
+        const workdata = re[0]
+        workdata.processing_date = workdata.processing_date.toISOString();
         return (
             <>
                 <Container>
                     <h1>検索結果</h1>
-                    <EX productData={re[0]}></EX>
+                    <EX productData={workdata}></EX>
                     <Link href="/tracker">
                         <Button variant="secondary" type='submit'>戻る</Button>
                     </Link>

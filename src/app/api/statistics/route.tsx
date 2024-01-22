@@ -1,7 +1,5 @@
 // app/api/statistics/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import type { NextApiRequest, NextApiResponse } from 'next';
-
 import { getDBConnection } from '@/components/DBConnectionManager';
 
 export const GET = async (req: NextRequest) => {

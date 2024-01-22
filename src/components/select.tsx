@@ -3,17 +3,18 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 
+type MyformProps = {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>, startDate: string, endDate: string) => void;
+};
 
-export default function Myform({ onSubmit }) {
-  const [message, setMessage] = useState('');
+
+export default function Myform({ onSubmit }: MyformProps) {
   const [startdateValue, setStartDateValue] = useState('');
   const [stopdateValue, setStopdateValue] = useState('');
-  const router = useRouter();
 
   const startdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStartDateValue(e.target.value);
@@ -22,7 +23,7 @@ export default function Myform({ onSubmit }) {
     setStopdateValue(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     onSubmit(e, startdateValue, stopdateValue);
   };
 
@@ -52,7 +53,6 @@ export default function Myform({ onSubmit }) {
               <div className="my-3">
                 <strong>開始日時：</strong>{startdateValue}<br />
                 <strong>終了日時：</strong>{stopdateValue}<br />
-                {message}<br />
               </div>
               <Button variant="primary" type="submit">検索</Button>
             </Form>
