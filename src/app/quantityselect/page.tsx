@@ -9,7 +9,7 @@ export default function StatisticsPage() {
   const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
 
   function defaultDates() {
-    const daysago = 3
+    const daysago = 365
     const today = new Date();
     const endday = new Date();
     endday.setDate(today.getDate() - daysago);
@@ -25,7 +25,7 @@ export default function StatisticsPage() {
       if (dateRange.startDate && dateRange.endDate) {
         const response = await fetch(`/api/statistics?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`);
         const result = await response.json();
-        setData(result); 
+        setData(result);
       }
       else {
         const { startdate, enddate } = defaultDates();

@@ -15,12 +15,6 @@ export default function Page() {
                 <Row>
                     <Col>
                         <br></br>
-                        <Link href="/timeselect">
-                            <Button variant="primary">加工時間統計</Button>{' '}
-                        </Link>
-                    </Col>
-                    <Col>
-                        <br></br>
                         <Link href="/quantityselect">
                             <Button variant="primary">加工数統計</Button>{' '}
                         </Link>
@@ -32,9 +26,9 @@ export default function Page() {
                         </Link>
                     </Col>
                 </Row>
-                <br/>
+                <br />
                 <Link href="/home">
-                    <Button variant="primary">戻る</Button>{' '}
+                    <Button variant="secondary">戻る</Button>{' '}
                 </Link>
             </Container>
         </div>

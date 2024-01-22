@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
+import Link from 'next/link';
 
 type userState = { beforepass: string, afterpass: string }
 
@@ -66,9 +67,7 @@ export default function User() {
         {/* 変更後のパスワードの空白禁止 */}
         <Button variant="primary" onClick={onClickhandler}>パスワード変更{showInput}</Button>{' '}
         {showInput &&
-
           <Form noValidate validated={validated} onSubmit={onSubmitHandler} className='flex flex-col justify-center' action='/api/form' method='POST'>
-
             <Form.Group as={Col} md="6" className="mb-3" type="invalid">
               <Form.Label>変更前</Form.Label>
               <Form.Control type="password" name='beforepass' placeholder='BeforePass' required />
@@ -76,7 +75,6 @@ export default function User() {
                 untipuri.
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group as={Col} md="6" className="mb-3" type="invalid">
               <Form.Label>変更後</Form.Label>
               <Form.Control type="password" name='afterpass' placeholder='AfterPass' required />
@@ -84,11 +82,13 @@ export default function User() {
                 untipuri.
               </Form.Control.Feedback>
             </Form.Group>
-
-            <Button variant="secondary" type='submit'>送信</Button>
+            <Button variant="primary" type='submit'>送信</Button>
+            <p>値書き換え判定:{hanteikekka}</p>
           </Form>
         }
-        <p>値書き換え判定:{hanteikekka}</p>
+        <Link href="/home">
+          <Button variant="secondary">戻る</Button>{' '}
+        </Link>
       </Container>
     </>
 

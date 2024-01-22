@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
+
 
 export default function Myform({ onSubmit }) {
   const [message, setMessage] = useState('');
@@ -52,8 +54,11 @@ export default function Myform({ onSubmit }) {
                 <strong>終了日時：</strong>{stopdateValue}<br />
                 {message}<br />
               </div>
-              <Button variant="primary" type="submit">送信</Button>
+              <Button variant="primary" type="submit">検索</Button>
             </Form>
+            <Link href="/statistics">
+              <Button variant="secondary" type='submit'>戻る</Button>
+            </Link>
           </Col>
         </Row>
       </Container>

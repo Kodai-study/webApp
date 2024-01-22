@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Graph from './chart';
 import Container from 'react-bootstrap/Container';
 import Select from '@/components/select'
+import Link from 'next/link';
+import Button from 'react-bootstrap/Button';
 
 export default function StatisticsPage() {
   const [data, setData] = useState([]);
@@ -48,7 +50,6 @@ export default function StatisticsPage() {
         </h1>
         <Graph data={data} />
         <Select onSubmit={handleDateRangeSubmit} />
-
       </Container>
     </div>
   );

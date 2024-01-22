@@ -26,7 +26,7 @@ export default function Home() {
                 <h1>監視カメラ</h1>
                 <Cam streamNumber={0}>カメラ映像1</Cam>
                 <Cam streamNumber={1}>カメラ映像2</Cam>
-                <Button onClick={() => router.push("/home")}>戻る</Button>{' '}
+                <Button variant="secondary" onClick={() => router.push("/home")}>戻る</Button>{' '}
             </Container>
         </>
     );

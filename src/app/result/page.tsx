@@ -1,33 +1,8 @@
 import DBGet1Colum from "./DB"
-import Image from 'next/legacy/image';
 import Link from 'next/link';
-import fs from 'fs';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-
-const Imgsrc = () => {
-
-    return (
-        <div>
-            <Image
-                src="/imgs/test/ana.png"
-                alt="Example Image"
-                layout="responsive"
-                width={1980}
-                height={1150}
-            />
-        </div>
-    );
-};
-
-const Test_GetFileSystemImage = () => {
-    let imageBuffer = fs.readFileSync('/mnt/win_share/imgs/yasi.jpg')
-    const base64Image = imageBuffer.toString('base64');
-
-    // HTMLで表示
-    const imageSrc = `data:image/jpeg;base64,${base64Image}`;
-    return <img src={imageSrc} alt="Image from Buffer" />;
-}
+import EX from './exchange'
 
 type SearchParams = {
     no: number;
@@ -49,18 +24,13 @@ const ResultPage = async ({ params, searchParams,
         }
         const re = await DBGet1Colum(searchParams.no)
 
-        const keys = Object.keys(re[0]);
-        const propertiesString = keys.map(key => `${key}: ${re[0][key]}`).join(', ');
         return (
             <>
                 <Container>
                     <h1>検索結果</h1>
-                    {propertiesString}
-                    {/* <Test_GetFileSystemImage /> */}
-                    <br></br>
-                    <Imgsrc />
+                    <EX productData={re[0]}></EX>
                     <Link href="/tracker">
-                        <Button variant="primary" type='submit'>戻る</Button>
+                        <Button variant="secondary" type='submit'>戻る</Button>
                     </Link>
                 </Container>
             </>
@@ -81,7 +51,7 @@ const ResultPage = async ({ params, searchParams,
                     {errorMessage}
                     <br></br>
                     <Link href="/tracker">
-                        <Button variant="primary" type='submit'>戻る</Button>
+                        <Button variant="secondary" type='submit'>戻る</Button>
                     </Link>
                 </Container>
             </>
