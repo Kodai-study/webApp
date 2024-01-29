@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import jsQR from "jsqr";
 import { useRouter } from "next/navigation";
@@ -8,47 +8,23 @@ import Container from 'react-bootstrap/Container';
 import Link from 'next/link';
 
 const QRTestPage = () => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const [qrCodeText, setQRCodeText] = useState("");
+  const [lastDetectedQR, setLastDetectedQR] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const webcamRef = useRef<Webcam>(null);
+  const [showManualEntry, setShowManualEntry] = useState(false);
+  const webcamRef = useRef(null);
   const router = useRouter();
 
-  const handleCapture = () => {
-    if (webcamRef.current !== null) {
+  useEffect(() => {
+    const captureInterval = setInterval(() => {
       const imageSrc = webcamRef.current.getScreenshot();
-      setImageSrc(imageSrc);
-      setQRCodeText("");
-      setFeedbackMessage("");
-    } else {
-      console.log("CaptuerError")
-    }
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (e.target) {
-            setImageSrc(e.target.result);
-            setQRCodeText("");
-            setFeedbackMessage("");
-          }
-        };
-        reader.readAsDataURL(file);
+      if (imageSrc) {
+        analyzeImage(imageSrc);
       }
-    }
-  };
+    }, 1000); // 1秒ごとにキャプチャ
 
-  const handleAnalyzeClick = () => {
-    if (imageSrc && typeof imageSrc === 'string') {
-      analyzeImage(imageSrc);
-    } else {
-      console.log("TypeError")
-    }
-  };
+    return () => clearInterval(captureInterval);
+  }, []);
 
   const analyzeImage = (imageSrc: string) => {
     const image = new Image();
@@ -56,27 +32,16 @@ const QRTestPage = () => {
       const canvas = document.createElement("canvas");
       canvas.width = image.width;
       canvas.height = image.height;
-      if (canvas) {
-        const context = canvas.getContext("2d");
-        if (context) {
-          context.drawImage(image, 0, 0, image.width, image.height);
-          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-          const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-          if (qrCode) {
-            setQRCodeText(qrCode.data);
-            setFeedbackMessage("QRコードが正常に検出されました。");
-          } else {
-            setQRCodeText("");
-            setFeedbackMessage("QRコードが見つかりませんでした。");
-          }
-        }
-        else {
-          console.log("ERROR")
-        }
+      const context = canvas.getContext("2d");
+      context.drawImage(image, 0, 0, image.width, image.height);
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+
+      if (qrCode && qrCode.data !== lastDetectedQR) {
+        setQRCodeText(qrCode.data);
+        setLastDetectedQR(qrCode.data);
+        setFeedbackMessage("QRコードが正常に検出されました。");
       }
-      // context.drawImage(image, 0, 0, image.width, image.height);
-      // const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      // const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
     };
     image.src = imageSrc;
   };
@@ -85,6 +50,10 @@ const QRTestPage = () => {
     if (qrCodeText) {
       router.push(`/result?no=${encodeURIComponent(qrCodeText)}`);
     }
+  };
+
+  const toggleManualEntry = () => {
+    setShowManualEntry(!showManualEntry);
   };
 
   return (
@@ -101,35 +70,30 @@ const QRTestPage = () => {
             />
           </div>
 
-          {typeof imageSrc == "string" && (
-            <div className="mt-4">
-              <p>キャプチャー画面</p>
-              <img src={imageSrc} alt="Captured Image" style={{ width: '300px', height: 'auto' }} />
-            </div>
-          )}
-
-          <div className="mt-4">
-            <Button onClick={handleCapture}>撮影ボタン</Button>
-          </div>
-
-          <div className="mt-4">
-            <input type="file" onChange={handleFileChange} />
-            <Button onClick={handleAnalyzeClick}>QR検出ボタン</Button>
-          </div>
-
           <div className="mt-4">
             <p style={{ color: qrCodeText ? 'green' : 'red' }}>
               {feedbackMessage}
             </p>
-            <p>検索するQRコード：{qrCodeText}</p>
+            <p>検出されたQRコード：{qrCodeText}</p>
           </div>
 
           <div className="mt-4">
-            <input
-              placeholder="シリアルナンバー入力"
-              onChange={(e) => setQRCodeText(e.target.value)}
-              className="border p-2 rounded"
-            />
+            <Button onClick={toggleManualEntry}>
+              {showManualEntry ? '手動入力を隠す' : '手動入力を表示'}
+            </Button>
+          </div>
+
+          {showManualEntry && (
+            <div className="mt-4">
+              <input
+                placeholder="QRコード値を手動で入力"
+                onChange={(e) => setQRCodeText(e.target.value)}
+                className="border p-2 rounded"
+              />
+            </div>
+          )}
+
+          <div className="mt-4">
             <Button onClick={navigateToResult}>検索</Button>
           </div>
         </div>

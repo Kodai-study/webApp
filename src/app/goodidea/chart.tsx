@@ -15,9 +15,9 @@ export default function Chart(props: ChartProps) {
     labels: [] as string[],
     datasets: [
       {
-        data: [] as number[],
-        backgroundColor: ['red', 'blue', '#FFCE56'], // それぞれのセクションの色
-        hoverBackgroundColor: ['red', 'blue', '#FFCE56'],
+        data: [],
+        backgroundColor: ['rgba(255,0,0,0.8)', 'rgba(0,0,255,0.8)', '#FFCE56'], // それぞれのセクションの色
+        hoverBackgroundColor: ['rgba(255,0,0,0.8)', 'rgba(0,0,255,0.8)', '#FFCE56'],
       },
     ],
   };
